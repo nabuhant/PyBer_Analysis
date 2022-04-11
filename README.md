@@ -1,13 +1,20 @@
 # PyBer_Analysis
 Module5_MatPlotLib
 
-
-The analysis should contain the following:
-
 # Overview of the analysis
 ## Background
-Old analysis in module
-## Purpose 
+As a data analyst at PyBer, a ride-sharing app company, a project is carried out to analyze all the rideshare data from January to early May of 2019 and to create compelling visualizations for the CEO, V. Isualize. The data is merged to one DataFrame where the columns are the city, city type (rural, suburban, & urban), fare, date & time of ride, unique riide id, and driver count in each city.  
+The data was analysed and using Python's Matplotlib libray visualized into:  
+**1 -** A scatter plot demonstrating relationship between the average fare to total number of rides per city (categorized by city type and sized by number of drivers per city). Figure is below.
+![image1](/analysis/Fig1.png)  
+**2 -** The data's measures of central tendency (mean, median, mode) along with the outliers were visualized using box-and-whisker plots. This was done for the number of rides, fares, and number of drivers, all by city type. An example is below for the ride count date visualization.
+![image2](/analysis/Fig2.png)
+
+**3 -** Also pie charts were used to visualize the % of total fares, the % of total rides, and the % of totaal drivers, all by city type. An example is below for the % of total drivers by city type.
+![image3](/analysis/Fig7.png)  
+
+All figures described above can be found in the [analysis folder](/analysis)
+ ## Purpose T
 Explain the purpose of the new analysis.
 
 # Results
