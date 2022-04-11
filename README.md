@@ -42,12 +42,20 @@ Below is a the final PyBer Summary DataFrame.
 ![image4](/analysis/PyBerSummaryDataFrame.PNG)  
 
 ## Date (by Week) Indexed DataFrame
-Another DataFrame with the date as the index (with specifically a DateTimeIndex data type) was created, categorized by city type. Then using the **resample()** function, the date was divided into bins by the weeks between January and May 2019. Using the **sum()** function, the total fare was calculated for every week. The code to do so is below:
+Another DataFrame with the date as the index (specifically set to a DateTimeIndex data type) was created using the **pivot()** function, categorized by city type. Then the **loc()** method was used to get the date range from 2019-01-01 to 2019-04-28. Finally using the **resample()** function, the date range was divided into weekly bins between January and May 2019. Using the **sum()** function, the total fare was calculated for every week. The code to do so is below:
 
 ```python
+# pivot() to set date as index, type as columns, and fare as values
+type_date_df = type_date_df.pivot(index = "date", columns = "type", values = "fare")
+
+# loc() to get weekly bins
+range_type_date_df = type_date_df.loc['2019-01-01':'2019-04-29']
+
+# pd.to_datetime to change to DateTimeIndex
+range_type_date_df.index = pd.to_datetime(range_type_date_df.index)
+
 # DataFrame created using the "resample()" function by week 'W' which holds the sum of the fares for each week, all by city type.
 fare_dates_df = fare_dates_df.resample('W').sum()
-fare_dates_df
 ```
 The resulting DataFrame is below:  
 ![image6](/analysis/PyBerWeeklyFareDataFrame.PNG)  
