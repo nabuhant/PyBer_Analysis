@@ -20,19 +20,58 @@ The first part of the analysis described in the background gave an overview of w
 
 
 # Results
-![image4](/analysis/PyBer Summary DataFrame.PNG)
-![image5](/analysis/PyBer_fare_summary.png)
-![image6](/analysis/PyBer Weekly Fare DataFrame.PNG)
 
-Using images from the summary DataFrame and multiple-line chart, describe the differences in ride-sharing data among the different city types.  
-There is a description of the differences in ride-sharing data among the different city types. Ride-sharing data include the total rides, total drivers, total fares, average fare per ride and driver, and total fare by city type
+## PyBer Data Summary DataFrame
+A summary Dataframe was created to plot the multiple-line graph. The DataFrame is a summary of the data. It holds the number of total rides, number of total drivers, average fare per ride, and average fare per driver categorized by city type. To obtain this DataFrame the ride data and city data were merged on the common column, city.  
+``` python
+pyber_data_df = pd.merge(ride_data_df, city_data_df, how="left", on=["city", "city"])
+```
+Then the **groupby()** operation was applied to the city types along with the **sum()** and **count()** functions to find the total values (rides, drivers, fares) and average fares (per ride and driver). Two examples of how they were used is below:
+
+```python
+# Total amount of fares for each city type. groupby() and sum() used
+fares_by_type = pyber_data_df.groupby(["type"]).sum()["fare"]
+fares_by_type # a Series
+
+# Average fare per ride for each city type. groupby() and count() used
+total_rides_type = pyber_data_df.groupby(["type"]).count()["ride_id"]
+total_rides_type
+```
+
+Below is a the final PyBer Summary DataFrame.  
+![image4](/analysis/PyBerSummaryDataFrame.PNG)  
+
+## Date (by Week) Indexed DataFrame
+Another DataFrame with the date as the index (with specifically a DateTimeIndex data type) was created, categorized by city type. Then using the **resample()** function, the date was divided into bins by the weeks between January and May 2019. Using the **sum()** function, the total fare was calculated for every week. The code to do so is below:
+
+```python
+# DataFrame created using the "resample()" function by week 'W' which holds the sum of the fares for each week, all by city type.
+fare_dates_df = fare_dates_df.resample('W').sum()
+fare_dates_df
+```
+The resulting DataFrame is below:  
+![image6](/analysis/PyBerWeeklyFareDataFrame.PNG)  
+
+This DataFrame was used to plot the multiple-line graph (each line is a city type), with the date (by week) on the x-axis and the total fare ($USD) on the y-axis. The graph was plotted usin the *object-oriented* interface method and Matplotlib's *fivethirtyeight* graph style.
+``` python
+#Object-Oriented Interface method
+fig = plt.figure(figsize = (22, 6))
+ax = fig.add_subplot()
+by_week_df.plot(ax=ax)
+
+ax.set_title("Total Fare by City Type")
+ax.set_xlabel("")
+ax.set_ylabel("Fare ($USD)")
+```
+The final formatted graph is below:
+![image5](/analysis/PyBer_fare_summary.png)
+
+## Results Analysis
+Looking at the summary DataFrame, one can conclude that the rides demand for PyBer is much higher (13 and 2.6 times more for rural and suburban cities, respectively) in urban cities. As a result the total fares is greater from urban cities. Also the amount of drivers in urban cities is much greater as well (rural is 78 and suburban is 490 while urban is 2,405). Yet, with a higher demand in urban cities and a larger number of available drivers (greater supply) the average fare per driver is the lowest in comparison to rural and suburban cities.  
+This trend of lower rides and therefore drivers and total fares as a city type becomes smaller (i.e. suburban then rural), could be attributed to the city's size. In smaller cities ride sharing is more likely to be less common in comparison to urban cities, therefore has less demand. Similarly, the trend of having a higher average fare per ride and driver could also be attributed to the size of the city. For an instance, in rural areas ride sharing is more likely to be used by customers when they need to travel a long distance while in urban cities travel distance is shorter.
 
 # Summary
-Based on the results, provide three business recommendations to the CEO for addressing any disparities among the city types.
-
-
-1.) Provide Urban drivers extra comission for late night pickups and drop.  
-
-2.) Allow urban drivers to provide outstation services as per their convenience. (same model can be applied for suburban and rural city types)  
-
-3.) In rural and suburban areas though the average fare per driver is more compared to urban areas but the no. of rides and total drivers are less compared to urabn cities. So we can introduce a discount scheme for the customers and an incentive scheme for ther driver based on the number rides completed respectively. This will help increase the number rides especially in the rural areas where the number of rides are 125 comapred to urban's 1625  
+Based on the results, three recommendations to the CEO for addressing any disparities among the city types are:
+**1-** Provide more encouragement through marketing and advertisement campaigns for customers to start tipping drivers, specifically in urban cities.
+**2-** During high demand periods (end of February according to the line graph), notify drivers of urban areas and allow them to operate in rural or suburban areas such that the demand is met in areas with less drivers and urban drivers are earning more money.
+**3-** Increase the demand in rural areas by targeting potential customers from that area and offering customers incentives for using the PyBer service.
