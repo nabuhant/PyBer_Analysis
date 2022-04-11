@@ -3,7 +3,7 @@ Module5_MatPlotLib
 
 # Overview of the analysis
 ## Background
-As a data analyst at PyBer, a ride-sharing app company, a project is carried out to analyze all the rideshare data from January to early May of 2019 and to create compelling visualizations for the CEO, V. Isualize. The data is merged to one DataFrame where the columns are the city, city type (rural, suburban, & urban), fare, date & time of ride, unique riide id, and driver count in each city.  
+As a data analyst at PyBer, a ride-sharing app company, a project is carried out to analyze all the rideshare data from January to early May of 2019 and to create compelling visualizations for the CEO, V. Isualize. The data is merged to one DataFrame where the columns are the city, city type (rural, suburban, & urban), fare, date & time of ride, unique ride id, and driver count in each city.  
 The data was analysed and using Python's Matplotlib libray visualized into:  
 **1 -** A scatter plot demonstrating relationship between the average fare to total number of rides per city (categorized by city type and sized by number of drivers per city). Figure is below.
 ![image1](/analysis/Fig1.png)  
@@ -13,11 +13,17 @@ The data was analysed and using Python's Matplotlib libray visualized into:
 **3 -** Also pie charts were used to visualize the % of total fares, the % of total rides, and the % of totaal drivers, all by city type. An example is below for the % of total drivers by city type.
 ![image3](/analysis/Fig7.png)  
 
-All figures described above can be found in the [analysis folder](/analysis)
- ## Purpose T
-Explain the purpose of the new analysis.
+All figures described above can be found in the [analysis folder](/analysis).
+
+ ## Purpose
+The first part of the analysis described in the background gave an overview of what occurred between January and early May of 2019, but did not provide any details regarding the monthly happenings. The second part of the analysis breaks down the data in to weekly timeframes and uses a multiple-line graph as its visualization. The graphs show the weeekly fare in $USD by city type (rural, suburban, & urban) over the four months.
+
 
 # Results
+![image4](/analysis/PyBer Summary DataFrame.PNG)
+![image5](/analysis/PyBer_fare_summary.png)
+![image6](/analysis/PyBer Weekly Fare DataFrame.PNG)
+
 Using images from the summary DataFrame and multiple-line chart, describe the differences in ride-sharing data among the different city types.  
 There is a description of the differences in ride-sharing data among the different city types. Ride-sharing data include the total rides, total drivers, total fares, average fare per ride and driver, and total fare by city type
 
